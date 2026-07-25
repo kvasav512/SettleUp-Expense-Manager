@@ -1,22 +1,33 @@
 # SettleUp Expense Manager
 
-This project was developed as part of my Data Structures coursework using C++. It helps simplify expense settlement among a group of people by calculating the minimum number of transactions needed to clear all pending payments.
+This is a C++ Data Structures project that solves the Minimum Cash Flow problem. It helps simplify expense settlement among a group of people by calculating the minimum number of transactions required to settle all pending payments.
 
-Instead of everyone paying everyone else separately, the program calculates each person's final balance and generates a much simpler settlement plan.
+Instead of everyone paying each other separately, the program calculates each person's net balance and generates an optimized settlement plan with the minimum number of transactions.
+
+---
+
+## Concepts Used
+
+- C++
+- Standard Template Library (STL)
+- Graph (Adjacency Matrix)
+- Priority Queue (Heap)
+- Multiset
+- Unordered Map
 
 ---
 
 ## Features
 
-- Add people to the expense group.
-- Record shared expenses.
-- Record direct debts between two people.
-- View each person's net balance.
-- Calculate the minimum number of transactions required.
-- View transaction history with timestamps.
-- Export the transaction history to a text file.
-- Simple menu-driven console interface.
-- Colored terminal output for better readability.
+- Add people to the expense group
+- Record shared expenses
+- Record direct debts between two people
+- View each person's net balance
+- Calculate the minimum number of transactions required
+- View transaction history with timestamps
+- Export the transaction history to a text file
+- Simple menu-driven console interface
+- Colored terminal output for better readability
 
 ---
 
@@ -72,6 +83,13 @@ Instead of everyone paying everyone else separately, the program calculates each
 
 ---
 
+## Algorithms Used
+
+- Minimum Cash Flow Algorithm
+- Greedy Approach
+
+---
+
 ## Project Structure
 
 ```
@@ -87,22 +105,28 @@ SettleUp-Expense-Manager/
 ## Compile
 
 ```bash
-g++ main.cpp -o SettleUp
+g++ -std=c++17 main.cpp -o SettleUp
 ```
 
 ---
 
 ## Run
 
+### Windows
+
 ```bash
 .\SettleUp.exe
 ```
 
+### Linux / macOS
+
+```bash
+./SettleUp
+```
+
 ---
 
-## Future Improvements
-
-Some features that can be added in future versions are:
+## Possible future improvements
 
 - Split expenses by custom percentages instead of equal shares.
 - Save and load expense data from files.
@@ -115,6 +139,7 @@ Some features that can be added in future versions are:
 ## Author
 
 **Vasav Kumar**  
-B.Tech CSE Student
 
-GitHub: https://github.com/kvasav512
+Computer Science Engineering Student
+
+GitHub: [@kvasav512](https://github.com/kvasav512)
