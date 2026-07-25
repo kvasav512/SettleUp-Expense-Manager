@@ -1,17 +1,19 @@
-# Compiled files
+# Ignore executable file
 *.exe
 *.out
+
+# Object files
 *.o
 *.obj
 
-# VS Code
+# VS Code settings
 .vscode/
 
-# Visual Studio
+# Visual Studio files
 .vs/
 
-# CLion
+# CLion files
 .idea/
 
-# Generated history file
+# Program history
 history.txt
