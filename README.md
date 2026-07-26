@@ -1,4 +1,4 @@
-# SettleUp Expense Manager
+# SettleUp Expense Manager (Minimum Cash Flow Problem)
 
 This is a C++ Data Structures project that solves the Minimum Cash Flow problem. It helps simplify expense settlement among a group of people by calculating the minimum number of transactions required to settle all pending payments.
 
@@ -8,7 +8,7 @@ Instead of everyone paying each other separately, the program calculates each pe
 
 ## Concepts Used
 
-- C++
+- C++17
 - Standard Template Library (STL)
 - Graph (Adjacency Matrix)
 - Priority Queue (Heap)
@@ -28,6 +28,25 @@ Instead of everyone paying each other separately, the program calculates each pe
 - Export the transaction history to a text file
 - Simple menu-driven console interface
 - Colored terminal output for better readability
+
+---
+
+## Screenshots
+
+### Main Menu
+![Main Menu](screenshots/main-menu.png)
+
+### Add Shared Expense
+![Add Shared Expense](screenshots/add-expense.png)
+
+### Net Balances
+![Net Balances](screenshots/balances.png)
+
+### Minimum Settlement
+![Minimum Settlement](screenshots/settlements.png)
+
+### Transaction History
+![Transaction History](screenshots/history.png)
 
 ---
 
@@ -90,10 +109,29 @@ Instead of everyone paying each other separately, the program calculates each pe
 
 ---
 
+## Time Complexity
+
+| Operation | Time Complexity |
+|-----------|-----------------|
+| Add Person | O(1) average |
+| Record Direct Debt | O(1) |
+| Record Shared Expense | O(k) where *k* is the number of participants |
+| Calculate Net Balances | O(n²) |
+| Compute Minimum Settlement | O(n log n) |
+| Display Transaction History | O(h), where *h* is the number of history records |
+
+---
+
 ## Project Structure
 
 ```
 SettleUp-Expense-Manager/
+│── screenshots/
+│   ├── main-menu.png
+│   ├── add-expense.png
+│   ├── balances.png
+│   ├── settlements.png
+│   └── history.png
 │── main.cpp
 │── README.md
 │── LICENSE
@@ -123,6 +161,17 @@ g++ -std=c++17 main.cpp -o SettleUp
 ```bash
 ./SettleUp
 ```
+
+---
+
+## Sample Output
+
+The application successfully:
+
+- Calculates each participant's net balance.
+- Minimizes the number of settlement transactions.
+- Maintains a transaction history log.
+- Exports the history to a text file.
 
 ---
 
