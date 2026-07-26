@@ -136,6 +136,8 @@ public:
         return idx;
     }
 
+    bool personExists(const string& name) const { return indexOf.find(name) != indexOf.end(); }
+
     bool hasPeople() const { return !people.empty(); }
     int personCount() const { return (int)people.size(); }
     const vector<string>& getPeople() const { return people; }
@@ -150,14 +152,27 @@ public:
             cout << Color::YELLOW << "  [!] Expense amount must be greater than zero, skipped.\n" << Color::RESET;
             return;
         }
+
+        // Remove duplicate participant names (keep first occurrence, warn on skip)
+        vector<string> uniqueParticipants;
+        set<string> seen;
+        for (const auto& name : participants) {
+            if (seen.insert(name).second) {
+                uniqueParticipants.push_back(name);
+            } else {
+                cout << Color::YELLOW << "  [!] Duplicate participant \"" << name << "\" ignored.\n" << Color::RESET;
+            }
+        }
+
         int payerIdx = getOrAddPerson(payer);
         long long totalPaise = toPaise(amountRupees);
-        int n = (int)participants.size();
+        const vector<string>& participantsList = uniqueParticipants;
+        int n = (int)participantsList.size();
         long long basePaise = totalPaise / n;
         long long remainder = totalPaise % n;
 
         for (int i = 0; i < n; i++) {
-            int pIdx = getOrAddPerson(participants[i]);
+            int pIdx = getOrAddPerson(participantsList[i]);
             if (pIdx == payerIdx) continue;
             long long share = basePaise + (i < remainder ? 1 : 0);
             graph[pIdx][payerIdx] += share;
@@ -306,7 +321,10 @@ int readInt(const string& prompt) {
     int x;
     while (true) {
         cout << Color::CYAN << prompt << Color::RESET;
-        if (cin >> x) return x;
+        if (cin >> x) {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard rest of line
+            return x;
+        }
         cout << Color::RED << "  [!] Please enter a valid integer.\n" << Color::RESET;
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -317,18 +335,35 @@ double readDouble(const string& prompt) {
     double x;
     while (true) {
         cout << Color::CYAN << prompt << Color::RESET;
-        if (cin >> x) return x;
+        if (cin >> x) {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discard rest of line
+            return x;
+        }
         cout << Color::RED << "  [!] Please enter a valid amount.\n" << Color::RESET;
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 }
 
+// Trims leading/trailing whitespace from a string.
+static string trim(const string& s) {
+    size_t start = s.find_first_not_of(" \t\r\n");
+    if (start == string::npos) return "";
+    size_t end = s.find_last_not_of(" \t\r\n");
+    return s.substr(start, end - start + 1);
+}
+
+// Reads a full line so names with spaces (e.g. "Mary Jane") are supported.
+// Re-prompts if the trimmed input is empty.
 string readWord(const string& prompt) {
-    string s;
-    cout << Color::CYAN << prompt << Color::RESET;
-    cin >> s;
-    return s;
+    while (true) {
+        cout << Color::CYAN << prompt << Color::RESET;
+        string s;
+        getline(cin, s);
+        s = trim(s);
+        if (!s.empty()) return s;
+        cout << Color::RED << "  [!] Name cannot be empty.\n" << Color::RESET;
+    }
 }
 
 void printMenu() {
@@ -362,9 +397,13 @@ int main() {
 
         switch (choice) {
             case 1: {
-                string name = readWord("  Enter person's name (no spaces): ");
-                manager.getOrAddPerson(name);
-                cout << Color::GREEN << "  Added: " << name << Color::RESET << "\n";
+                string name = readWord("  Enter person's full name: ");
+                if (manager.personExists(name)) {
+                    cout << Color::YELLOW << "  Person already exists" << Color::RESET << "\n";
+                } else {
+                    manager.getOrAddPerson(name);
+                    cout << Color::GREEN << "  Added: " << name << Color::RESET << "\n";
+                }
                 break;
             }
             case 2: {
