@@ -12,6 +12,7 @@
  * .\settleup.exe
  */
 
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -145,6 +146,10 @@ public:
             cout << Color::YELLOW << "  [!] No participants given, expense skipped.\n" << Color::RESET;
             return;
         }
+        if (amountRupees <= 0.0) {
+            cout << Color::YELLOW << "  [!] Expense amount must be greater than zero, skipped.\n" << Color::RESET;
+            return;
+        }
         int payerIdx = getOrAddPerson(payer);
         long long totalPaise = toPaise(amountRupees);
         int n = (int)participants.size();
@@ -164,6 +169,10 @@ public:
     }
 
     void addDirectDebt(const string& debtor, const string& creditor, double amountRupees) {
+        if (amountRupees <= 0.0) {
+            cout << Color::YELLOW << "  [!] Debt amount must be greater than zero, skipped.\n" << Color::RESET;
+            return;
+        }
         int d = getOrAddPerson(debtor);
         int c = getOrAddPerson(creditor);
         if (d == c) {
