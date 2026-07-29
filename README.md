@@ -34,18 +34,43 @@ Instead of everyone paying each other separately, the program calculates each pe
 ## Screenshots
 
 ### Main Menu
+
 ![Main Menu](screenshots/main-menu.png)
 
+---
+
+### Add a Person
+
+![Add Person](screenshots/add-person.png)
+
+---
+
 ### Add Shared Expense
+
 ![Add Shared Expense](screenshots/add-expense.png)
 
-### Net Balances
+---
+
+### Record Direct Debt
+
+![Direct Debt](screenshots/add-direct-debt.png)
+
+---
+
+### Current Net Balances
+
 ![Net Balances](screenshots/balances.png)
 
-### Minimum Settlement
-![Minimum Settlement](screenshots/settlements.png)
+---
+
+### Minimum Settlement Transactions
+
+![Settlement Transactions](screenshots/settlements.png)
+
+---
 
 ### Transaction History
+
 ![Transaction History](screenshots/history.png)
 
 ---
@@ -128,7 +153,9 @@ Instead of everyone paying each other separately, the program calculates each pe
 SettleUp-Expense-Manager/
 │── screenshots/
 │   ├── main-menu.png
+│   ├── add-person.png
 │   ├── add-expense.png
+│   ├── add-direct-debt.png
 │   ├── balances.png
 │   ├── settlements.png
 │   └── history.png
